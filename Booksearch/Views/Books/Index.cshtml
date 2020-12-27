@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Booksearch.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Books</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "Books", FormMethod.Get))
+    {
+        <b>Search by:</b>
+        <text>&nbsp</text>;@Html.RadioButton("Searchby", "Bookname", true)<text>&nbsp; Bookname</text>
+        <text>&nbsp</text>;@Html.RadioButton("Searchby", "Booktype")<text>&nbsp; Booktype</text>
+        <br />
+        <br />
+        @Html.TextBox("search")<text>&nbsp; &nbsp; &nbsp;</text><button class="btn btn-primary" type="submit" value="search"> Search </button>
+
+        
+
+    }
+</p>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bookname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Availability)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BookType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bookname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Availability)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Bookid })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Bookid })
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
